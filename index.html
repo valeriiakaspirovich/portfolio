@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valeriia Kaspirovich — Storyboard Artist & Animation Director</title>
+  <meta name="description" content="Storyboard Artist and Animation Director based in France. Working in animation since 2019." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #ffffff;
+      --fg:        #111111;
+      --muted:     #888888;
+      --faint:     #aaaaaa;
+      --border:    #e2e2e2;
+      --surface:   #f5f5f5;
+      --dark-card: #1c1c1a;
+      --display:   'Syne', system-ui, sans-serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─────────────────────────────────────────
+       NAVIGATION
+    ───────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      padding: 96px 48px 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 22px;
+    }
+
+    .hero-sub {
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─────────────────────────────────────────
+       SECTIONS (shared)
+    ───────────────────────────────────────── */
+    .section {
+      padding: 56px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 36px;
+    }
+
+    .sec-label {
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    /* ─────────────────────────────────────────
+       STORY PORTFOLIO — 2×2 GRID
+    ───────────────────────────────────────── */
+    .works-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .work-card { background: var(--surface); overflow: hidden; }
+    .work-card a { display: block; }
+    .work-card a .thumb { cursor: pointer; }
+    .work-card a:hover .thumb { transform: scale(1.02); }
+
+    /* ── Thumbnail placeholder ──
+       Replace background-color with background-image once you have stills.
+       e.g. background-image: url('img/motomars-thumb.jpg');
+    */
+    .thumb {
+      aspect-ratio: 16 / 9;
+      background-color: var(--surface);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px;
+      position: relative;
+      transition: transform .35s ease;
+    }
+
+    .thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.45) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .thumb-title, .thumb-role { position: relative; z-index: 1; }
+
+    /* Different placeholder shades per card */
+    .thumb-1 { background-color: #c9c9c5; }
+    .thumb-2 { background-color: #b2b2ae; }
+    .thumb-3 { background-color: #9c9c97; }
+    .thumb-4 { background-color: #ddddd8; }
+    .thumb-5 { background-color: #c0bfba; }
+    .thumb-6 { background-color: #d4d4cf; }
+
+    .work-card:hover .thumb { transform: scale(1.02); }
+
+    .thumb-title {
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,.95);
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    .thumb-role {
+      font-size: 10px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 16px;
+      border: 1px solid var(--border);
+      border-top: none;
+      background: var(--bg);
+    }
+
+    .card-type { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+
+    .card-watch {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--fg);
+      transition: opacity .2s;
+    }
+    .card-watch:hover { opacity: .5; }
+
+    /* Arrow SVG for watch links */
+    .arrow { display: inline-block; font-size: 11px; }
+
+    .card-lock {
+      font-size: 10px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--faint);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+    }
+
+    /* ─────────────────────────────────────────
+       COMMERCIAL PROJECTS — LIST
+    ───────────────────────────────────────── */
+    .projects-list { width: 100%; }
+
+    .proj-row {
+      display: grid;
+      grid-template-columns: 1fr 200px 170px 100px;
+      gap: 12px;
+      align-items: baseline;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left .2s;
+    }
+    .proj-row:first-child { border-top: 1px solid var(--border); }
+    .proj-row:hover { padding-left: 6px; }
+
+    .proj-row a {
+      display: contents;
+      color: inherit;
+    }
+
+    .proj-name {
+      font-family: 'Syne', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--fg);
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    .proj-studio { font-size: 11px; color: var(--muted); text-align: left; }
+    .proj-role   { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); text-align: left; }
+    .proj-type   { font-size: 11px; color: var(--faint); text-align: right; white-space: nowrap; }
+
+    /* ─────────────────────────────────────────
+       SHORT FILMS — 3-COLUMN
+    ───────────────────────────────────────── */
+    .films-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    /* ── Dark placeholder ──
+       Replace background-color with background-image once you have stills.
+    */
+    .film-thumb {
+      aspect-ratio: 16 / 9;
+      background-color: var(--dark-card);
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: opacity .3s;
+    }
+
+    .film-1 { background-color: #222220; }
+    .film-2 { background-color: #1a1a18; }
+    .film-3 { background-color: #2c2c2a; }
+
+    .film-card a .film-thumb { display: block; }
+    .film-card a:hover .film-thumb { opacity: .8; }
+
+    .film-title {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .film-meta {
+      font-size: 10px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--faint);
+      line-height: 1.9;
+    }
+
+    .award-tag {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 9px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      color: var(--muted);
+    }
+
+    /* ─────────────────────────────────────────
+       ABOUT
+    ───────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .about-text {
+      font-size: 15px;
+      line-height: 1.85;
+      font-weight: 300;
+      color: var(--fg);
+    }
+
+    .about-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .about-details strong {
+      display: block;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+    .about-details strong:first-child { margin-top: 0; }
+
+    .about-details > span {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .about-detail-sub {
+      font-size: 11px;
+      color: var(--faint);
+      margin-bottom: 10px;
+      padding-left: 1px;
+    }
+
+    /* ─────────────────────────────────────────
+       CV — EXPERIENCE & EDUCATION
+    ───────────────────────────────────────── */
+    .cv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 64px;
+      align-items: start;
+    }
+
+    .cv-col-title {
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 28px;
+    }
+
+    .cv-entry {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cv-entry:first-of-type { border-top: 1px solid var(--border); }
+
+    .cv-date {
+      font-size: 10px;
+      color: var(--faint);
+      letter-spacing: .04em;
+      padding-top: 2px;
+      line-height: 1.5;
+    }
+
+    .cv-body {}
+
+    .cv-company {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+
+    .cv-company em {
+      font-style: italic;
+      font-weight: 400;
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .cv-role {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .cv-desc {
+      font-size: 12px;
+      color: var(--fg);
+      line-height: 1.7;
+    }
+
+    /* Education column — simpler entries */
+    .cv-edu .cv-entry { grid-template-columns: 80px 1fr; }
+
+    @media (max-width: 900px) {
+      .cv-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    @media (max-width: 680px) {
+      .cv-entry { grid-template-columns: 1fr; gap: 4px; }
+      .cv-date { padding-top: 0; margin-bottom: 4px; }
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      color: var(--muted);
+      transition: color .2s;
+      letter-spacing: .04em;
+    }
+    .footer-links a:hover { color: var(--fg); }
+
+    .copyright {
+      font-size: 10px;
+      color: var(--faint);
+      letter-spacing: .06em;
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE (tablet / mobile)
+    ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 18px; }
+      .hero { padding: 64px 24px 48px; }
+      .section { padding: 40px 24px; }
+      footer { padding: 24px; }
+    }
+
+    @media (max-width: 680px) {
+      .works-grid { grid-template-columns: 1fr; }
+      .films-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .proj-row { grid-template-columns: 1fr auto; }
+      .proj-studio, .proj-role { display: none; }
+      .nav-links { display: none; } /* add hamburger menu if needed */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVIGATION ─── -->
+  <nav>
+    <a href="#" class="nav-logo">Valeriia Kaspirovich</a>
+    <ul class="nav-links">
+      <li><a href="mailto:vyukaspirovich@gmail.com">vyukaspirovich@gmail.com</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <h1>Valeriia<br>Kaspirovich</h1>
+    <p class="hero-sub">Storyboard &amp; Layout Artist &nbsp;·&nbsp; Paris, France</p>
+  </section>
+
+  <!-- ─── STORY PORTFOLIO ─── -->
+  <section class="section" id="work">
+    <div class="sec-header">
+      <span class="sec-label">Story Portfolio</span>
+    </div>
+
+    <div class="works-grid">
+
+      <!-- CARD 1 -->
+      <div class="work-card">
+        <a href="https://vimeo.com/1180306869?fl=ip&fe=ec" target="_blank" rel="noopener">
+          <div class="thumb thumb-1" style="background-image: url('thumb-takemymuffin.webp');">
+            <div class="thumb-title">Take My Muffin</div>
+            <div class="thumb-role">Japanimation · Action · Comedy</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="work-card">
+        <a href="https://vimeo.com/1180308527?fl=ip&fe=ec" target="_blank" rel="noopener">
+          <div class="thumb thumb-2" style="background-image: url('thumb-pengarena.png');">
+            <div class="thumb-title">PENGARENA (Histeria! × Riot Games)</div>
+            <div class="thumb-role">PROMO VIDEO · ACTION</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="work-card">
+        <a href="https://vimeo.com/1187659909?fl=ip&fe=ec" target="_blank" rel="noopener">
+          <div class="thumb thumb-3" style="background-image: url('thumb-motomars.webp');">
+            <div class="thumb-title">Motomars</div>
+            <div class="thumb-role">3D Feature · Action</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="work-card">
+        <a href="https://vimeo.com/1194122080?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
+          <div class="thumb thumb-4" style="background-image: url('thumb-sleepy.png');">
+            <div class="thumb-title">Sleepy</div>
+            <div class="thumb-role">2D SERIES · SOCIAL MEDIA</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="work-card">
+        <a href="https://vimeo.com/1194004356?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
+          <div class="thumb thumb-5" style="background-image: url('thumb-hunchcrunch.png');">
+            <div class="thumb-title">Hunch &amp; Crunch</div>
+            <div class="thumb-role">2D FEATURE · PRE-SCHOOL · MUSICAL</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- CARD 6 -->
+      <div class="work-card">
+        <a href="https://vimeo.com/1194123041?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
+          <div class="thumb thumb-6" style="background-image: url('thumb-dinosavrov.png');">
+            <div class="thumb-title">Dr. Dinosavrov</div>
+            <div class="thumb-role">3D FEATURE · COMEDY</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── COMMERCIAL PROJECTS ─── -->
+  <section class="section">
+    <div class="sec-header">
+      <span class="sec-label">Projects</span>
+    </div>
+
+    <div class="projects-list">
+
+      <div class="proj-row">
+        <span class="proj-name">Apocalypse Mojito</span>
+        <span class="proj-studio">Amopix · Strasbourg</span>
+        <span class="proj-role">Storyboard, Animatic, Layout</span>
+        <span class="proj-type">2D series</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">Pengarena (Riot Games)</span>
+        <span class="proj-studio">Histeria! Studio · São Paulo</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">3D ads</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">Sleepy</span>
+        <span class="proj-studio">Harmonie Di Studio</span>
+        <span class="proj-role">Head of Story</span>
+        <span class="proj-type">2D series</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">3D series (unannounced)</span>
+        <span class="proj-studio">BIG Company · Lyon</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">3D series</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">Docteur Dinosaure</span>
+        <span class="proj-studio">Yarko Studio · Moscow</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">3D feature</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">Malousha</span>
+        <span class="proj-studio">Soyuzmultfilm · Moscow</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">3D feature</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">BimiBoo</span>
+        <span class="proj-studio">BIMIBOO · Limassol</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">3D series</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">Take My Muffin</span>
+        <span class="proj-studio">Toonbox studio · Pathos</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">2D series</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">Hunch &amp; Crunch</span>
+        <span class="proj-studio">Klakson Studio · Moscow</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">2D series</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">Sanek &amp; Boryan</span>
+        <span class="proj-studio">DELAI Studio · Moscow</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">2D series</span>
+      </div>
+
+      <div class="proj-row">
+        <span class="proj-name">Meowgic</span>
+        <span class="proj-studio">Soyuzmultfilm · Moscow</span>
+        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-type">2D series</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── SHORT FILMS ─── -->
+  <section class="section" id="films">
+    <div class="sec-header">
+      <span class="sec-label">Short Films</span>
+    </div>
+
+    <div class="films-grid">
+
+      <!-- ✏️ EDIT: wrap each film-card in <a href="https://vimeo.com/XXXXXXX"> if you have a Vimeo link -->
+
+      <div class="film-card">
+        <a href="https://vimeo.com/1192876256?fl=tl&fe=ec" target="_blank" rel="noopener">
+          <div class="film-thumb film-1"></div>
+          <div class="film-title">Ordalion</div>
+          <div class="film-meta">2024 · Sci-fi</div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="https://vimeo.com/722094057?fl=pl&fe=vl" target="_blank" rel="noopener">
+          <div class="film-thumb film-2"></div>
+          <div class="film-title">Cheep-cheep</div>
+          <div class="film-meta">2022 · Historical drama</div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="https://vimeo.com/530004742?fl=tl&fe=ec" target="_blank" rel="noopener">
+          <div class="film-thumb film-3"></div>
+          <div class="film-title">Labyrinth</div>
+          <div class="film-meta">2020 · Animation</div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─── -->
+  <section class="section" id="about">
+    <div class="sec-header">
+      <span class="sec-label">About</span>
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <p class="about-text">
+          Storyboard and Layout Artist based in France.
+          Working professionally in animation since 2020 across pre-school series,
+          adult comedy, feature films, and commercials — in both 2D and 3D.
+        </p>
+      </div>
+
+      <div class="about-details">
+        <strong>Education</strong>
+        <span>GOBELINS · Paris</span>
+        <span class="about-detail-sub">Storyboard to Animatic, 2023</span>
+        <span>HSE Art and Design School · Moscow</span>
+        <span class="about-detail-sub">BA Illustration &amp; Animation, 2020–2022</span>
+        <span>ÉMCA · Angoulême</span>
+        <span class="about-detail-sub">School of Animation Cinema Arts, 2019–2020</span>
+
+        <strong>Languages</strong>
+        <span>English · French · Russian</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-links">
+      <a href="mailto:vyukaspirovich@gmail.com">vyukaspirovich@gmail.com</a>
+      <a href="https://www.linkedin.com/in/kaspirovich" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>
