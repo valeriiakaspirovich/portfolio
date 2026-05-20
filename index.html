@@ -492,7 +492,57 @@
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .proj-row { grid-template-columns: 1fr auto; }
       .proj-studio, .proj-role { display: none; }
-      .nav-links { display: none; } /* add hamburger menu if needed */
+      .nav-links { display: none; }
+    }
+
+    /* ─────────────────────────────────────────
+       VIDEO MODAL
+    ───────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .modal-inner {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,.7);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+      transition: color .2s;
+    }
+    .modal-close:hover { color: #fff; }
+
+    .modal-video {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .modal-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
   </style>
 </head>
@@ -620,7 +670,7 @@
       </div>
 
       <div class="proj-row">
-        <span class="proj-name">Docteur Dinosaure</span>
+        <span class="proj-name">Dr. Dinosavrov</span>
         <span class="proj-studio">Yarko Studio · Moscow</span>
         <span class="proj-role">Storyboard, Animatic</span>
         <span class="proj-type">3D feature</span>
@@ -683,7 +733,7 @@
 
       <div class="film-card">
         <a href="https://vimeo.com/1192876256?fl=tl&fe=ec" target="_blank" rel="noopener">
-          <div class="film-thumb film-1"></div>
+          <div class="film-thumb film-1" style="background-image: url('thumb-ordalion.png');"></div>
           <div class="film-title">Ordalion</div>
           <div class="film-meta">2024 · Sci-fi</div>
         </a>
@@ -691,7 +741,7 @@
 
       <div class="film-card">
         <a href="https://vimeo.com/722094057?fl=pl&fe=vl" target="_blank" rel="noopener">
-          <div class="film-thumb film-2"></div>
+          <div class="film-thumb film-2" style="background-image: url('thumb-cheepcheep.png');"></div>
           <div class="film-title">Cheep-cheep</div>
           <div class="film-meta">2022 · Historical drama</div>
         </a>
@@ -699,7 +749,7 @@
 
       <div class="film-card">
         <a href="https://vimeo.com/530004742?fl=tl&fe=ec" target="_blank" rel="noopener">
-          <div class="film-thumb film-3"></div>
+          <div class="film-thumb film-3" style="background-image: url('thumb-labyrinth.png');"></div>
           <div class="film-title">Labyrinth</div>
           <div class="film-meta">2020 · Animation</div>
         </a>
@@ -742,9 +792,52 @@
   <footer>
     <div class="footer-links">
       <a href="mailto:vyukaspirovich@gmail.com">vyukaspirovich@gmail.com</a>
-      <a href="https://www.linkedin.com/in/kaspirovich" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/kaspirovich/?locale=en_US" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </footer>
+
+  <!-- ─── VIDEO MODAL ─── -->
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal-inner">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-video">
+        <iframe id="modalIframe" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('modalIframe');
+    const closeBtn = document.getElementById('modalClose');
+
+    // Extract Vimeo ID from URL
+    function vimeoId(url) {
+      const m = url.match(/vimeo\.com\/(\d+)/);
+      return m ? m[1] : null;
+    }
+
+    // Intercept all Vimeo links
+    document.querySelectorAll('a[href*="vimeo.com"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const id = vimeoId(link.href);
+        if (!id) return;
+        iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1&color=ffffff`;
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal
+    function closeModal() {
+      modal.classList.remove('active');
+      iframe.src = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
 
 </body>
 </html>
