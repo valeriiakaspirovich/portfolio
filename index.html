@@ -125,6 +125,12 @@
       color: var(--faint);
     }
 
+    .sec-note {
+      font-size: 10px;
+      letter-spacing: .08em;
+      color: var(--faint);
+    }
+
     /* ─────────────────────────────────────────
        STORY PORTFOLIO — 2×2 GRID
     ───────────────────────────────────────── */
@@ -370,6 +376,70 @@
     }
 
     /* ─────────────────────────────────────────
+       LAYOUT POSING
+    ───────────────────────────────────────── */
+    .lp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .lp-item {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--surface);
+      cursor: zoom-in;
+    }
+
+    .lp-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s ease, opacity .25s ease;
+    }
+
+    .lp-item:hover img {
+      transform: scale(1.04);
+      opacity: .9;
+    }
+
+    @media (max-width: 680px) {
+      .lp-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Lightbox */
+    .lb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.92);
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .lb-overlay.active { display: flex; }
+    .lb-img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      display: block;
+    }
+    .lb-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,.7);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .lb-close:hover { color: #fff; }
+
+    /* ─────────────────────────────────────────
        CV — EXPERIENCE & EDUCATION
     ───────────────────────────────────────── */
     .cv-grid {
@@ -570,60 +640,78 @@
 
     <div class="works-grid">
 
-      <!-- CARD 1 -->
+      <!-- CARD 1 — KOT -->
       <div class="work-card">
         <a href="https://vimeo.com/1180306869?fl=ip&fe=ec" target="_blank" rel="noopener">
-          <div class="thumb thumb-1" style="background-image: url('thumb-3dfeature.jpeg');">
-            <div class="thumb-title">3D feature film</div>
+          <div class="thumb thumb-1" style="background-image: url('thumb-kot.png');">
+            <div class="thumb-title">KOT</div>
             <div class="thumb-role">3D FEATURE · ACTION</div>
           </div>
         </a>
       </div>
 
-      <!-- CARD 2 -->
-      <div class="work-card">
-        <a href="https://vimeo.com/1180308527?fl=ip&fe=ec" target="_blank" rel="noopener">
-          <div class="thumb thumb-2" style="background-image: url('thumb-pengarena.png');">
-            <div class="thumb-title">PENGARENA (Histeria! × Riot Games)</div>
-            <div class="thumb-role">PROMO VIDEO · ACTION</div>
-          </div>
-        </a>
-      </div>
-
-      <!-- CARD 3 -->
+      <!-- CARD 2 — Motomars -->
       <div class="work-card">
         <a href="https://vimeo.com/1187659909?fl=ip&fe=ec" target="_blank" rel="noopener">
-          <div class="thumb thumb-3" style="background-image: url('thumb-motomars.webp');">
+          <div class="thumb thumb-2" style="background-image: url('thumb-motomars.webp');">
             <div class="thumb-title">Motomars</div>
-            <div class="thumb-role">3D Feature · Action</div>
+            <div class="thumb-role">3D FEATURE · ACTION</div>
           </div>
         </a>
       </div>
 
-      <!-- CARD 4 -->
+      <!-- CARD 3 — Apocalypse Mojito -->
+      <div class="work-card">
+        <a href="https://vimeo.com/1233876659?fl=ip&fe=ec" target="_blank" rel="noopener">
+          <div class="thumb thumb-3" style="background-image: url('thumb-apocalypse.jpg');">
+            <div class="thumb-title">Apocalypse Mojito</div>
+            <div class="thumb-role">2D SERIES · ABSURD · COMEDY</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- CARD 4 — PENGARENA -->
+      <div class="work-card">
+        <a href="https://vimeo.com/1180308527?fl=ip&fe=ec" target="_blank" rel="noopener">
+          <div class="thumb thumb-4" style="background-image: url('thumb-pengarena.png');">
+            <div class="thumb-title">PENGARENA (Histeria! × Riot Games)</div>
+            <div class="thumb-role">3D ADS · ACTION</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- CARD 5 — Sleepy -->
       <div class="work-card">
         <a href="https://vimeo.com/1194122080?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
-          <div class="thumb thumb-4" style="background-image: url('thumb-sleepy.png');">
+          <div class="thumb thumb-5" style="background-image: url('thumb-sleepy.png');">
             <div class="thumb-title">Sleepy</div>
             <div class="thumb-role">2D SERIES · SOCIAL MEDIA</div>
           </div>
         </a>
       </div>
 
-      <!-- CARD 5 -->
+      <!-- CARD 6 — Hunch & Crunch -->
       <div class="work-card">
         <a href="https://vimeo.com/1194004356?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
-          <div class="thumb thumb-5" style="background-image: url('thumb-hunchcrunch.png');">
+          <div class="thumb thumb-6" style="background-image: url('thumb-hunchcrunch.png');">
             <div class="thumb-title">Hunch &amp; Crunch</div>
-            <div class="thumb-role">2D FEATURE · PRE-SCHOOL · MUSICAL</div>
+            <div class="thumb-role">2D SERIES · PRE-SCHOOL · MUSICAL</div>
           </div>
         </a>
       </div>
 
-      <!-- CARD 6 -->
+      <!-- CARD 7 — Les Mémés -->
+      <div class="work-card">
+        <div class="thumb thumb-1" style="background-image: url('thumb-memes.jpg');">
+          <div class="thumb-title">Les Mémés</div>
+          <div class="thumb-role">2D SERIES · SITCOM</div>
+        </div>
+      </div>
+
+      <!-- CARD 8 — Dr. Dinosavrov -->
       <div class="work-card">
         <a href="https://vimeo.com/1194123041?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
-          <div class="thumb thumb-6" style="background-image: url('thumb-dinosavrov.png');">
+          <div class="thumb thumb-2" style="background-image: url('thumb-dinosavrov.png');">
             <div class="thumb-title">Dr. Dinosavrov</div>
             <div class="thumb-role">3D FEATURE · COMEDY</div>
           </div>
@@ -632,6 +720,32 @@
 
     </div>
   </section>
+
+  <!-- ─── LAYOUT POSING ─── -->
+  <section class="section" id="layout">
+    <div class="sec-header">
+      <span class="sec-label">Layout Posing</span>
+      <span class="sec-note">Apocalypse Mojito</span>
+    </div>
+
+    <div class="lp-grid">
+      <div class="lp-item"><img src="lp-01.png" alt="Layout posing 1" loading="lazy"></div>
+      <div class="lp-item"><img src="lp-02.png" alt="Layout posing 2" loading="lazy"></div>
+      <div class="lp-item"><img src="lp-03.png" alt="Layout posing 3" loading="lazy"></div>
+      <div class="lp-item"><img src="lp-04.png" alt="Layout posing 4" loading="lazy"></div>
+      <div class="lp-item"><img src="lp-05.png" alt="Layout posing 5" loading="lazy"></div>
+      <div class="lp-item"><img src="lp-06.png" alt="Layout posing 6" loading="lazy"></div>
+      <div class="lp-item"><img src="lp-07.png" alt="Layout posing 7" loading="lazy"></div>
+      <div class="lp-item"><img src="lp-08.png" alt="Layout posing 8" loading="lazy"></div>
+      <div class="lp-item"><img src="lp-09.png" alt="Layout posing 9" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lb-overlay" id="lbOverlay">
+    <button class="lb-close" id="lbClose">✕</button>
+    <img class="lb-img" id="lbImg" src="" alt="">
+  </div>
 
   <!-- ─── COMMERCIAL PROJECTS ─── -->
   <section class="section">
@@ -644,7 +758,7 @@
       <div class="proj-row">
         <span class="proj-name">Les Mémés</span>
         <span class="proj-studio">Caïmans Productions · Paris</span>
-        <span class="proj-role">Storyboard, Animatic</span>
+        <span class="proj-role">Storyboard, Animatic, Editing</span>
         <span class="proj-type">2D series</span>
       </div>
 
@@ -812,6 +926,25 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Lightbox
+    const lbOverlay = document.getElementById('lbOverlay');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+
+    document.querySelectorAll('.lp-item img').forEach(img => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbOverlay.classList.add('active');
+      });
+    });
+
+    function closeLb() { lbOverlay.classList.remove('active'); lbImg.src = ''; }
+    lbClose.addEventListener('click', closeLb);
+    lbOverlay.addEventListener('click', e => { if (e.target === lbOverlay) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+  </script>
 
   <script>
     const modal = document.getElementById('videoModal');
